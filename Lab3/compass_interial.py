@@ -24,9 +24,13 @@ class LevelTracker:
         self.LEVEL_TOL_DEG = 5.0
 
     def is_level(self, accel):
+        ACCEL_BIAS_X = 30.23
+        ACCEL_BIAS_Y = 34.98
         ax, ay, az = accel
+        corrected_ax = ax - ACCEL_BIAS_X
+        corrected_ay = ay - ACCEL_BIAS_Y
 
-        tilt_rad = math.atan2(math.sqrt(ax * ax + ay * ay), abs(az))
+        tilt_rad = math.atan2(math.sqrt(corrected_ax * corrected_ax + corrected_ay * corrected_ay), abs(az))
         tilt_deg = math.degrees(tilt_rad)
         return tilt_deg < self.LEVEL_TOL_DEG
 
