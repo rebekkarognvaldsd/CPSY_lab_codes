@@ -68,7 +68,7 @@ class encoder_state {
 public:
     uint_fast8_t last_symbol;
     state_t qdecoder_state;
-    const uint8_t pin1, pin2;
+    uint8_t pin1, pin2;
     int64_t steps;
     uint64_t timestamp;
     oneapi::tbb::concurrent_priority_queue<lgGpioReport_t> inputs;
@@ -221,7 +221,9 @@ int main(int argc, char *argv[])
             lguSleep(1.0/static_cast<double>(RATE));
             left.run();
             right.run();
+            printf("%" PRId64 " %" PRId64 "\n", left.steps, right.steps);
+            fflush(stdout);
         }
-        printf("%" PRId64 "%" PRId64 "\n", left.steps, right.steps);
+
     }
 }
