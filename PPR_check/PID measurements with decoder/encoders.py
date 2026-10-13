@@ -11,6 +11,7 @@ class Encoders:
         """pins = (left_1, left_2, right_1, right_2). Swap a wheel's two pins to flip its sign."""
         self.left = 0
         self.right = 0
+        self.t = time.monotonic()
         self.proc = subprocess.Popen([DECODER, *map(str, pins)],
                                      stdout=subprocess.PIPE, text=True, bufsize=1)
         threading.Thread(target=self._read, daemon=True).start()
@@ -20,6 +21,7 @@ class Encoders:
             parts = line.split()
             if len(parts) == 2:          # skip anything that isn't "left right"
                 self.left, self.right = int(parts[0]), int(parts[1])
+                self.t = time.monotonic()
 
     def close(self):
         self.proc.terminate()            # the decoder handles SIGTERM and releases the pins
