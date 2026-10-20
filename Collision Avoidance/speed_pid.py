@@ -60,7 +60,7 @@ def volts_to_cm_text(v):
             return f"~{d1 + (d2 - d1) * (v1 - v) / (v1 - v2):.0f} cm"
 
 
-STOP_VOLTAGE = 2.3 # cm_to_volts(STOP_DISTANCE_CM)    # 40 cm -> ~1.51 V
+STOP_VOLTAGE = 2.05 # cm_to_volts(STOP_DISTANCE_CM)    # 40 cm -> ~1.51 V
 CLEAR_VOLTAGE = cm_to_volts(CLEAR_DISTANCE_CM)  # 60 cm -> ~1.05 V
 assert CLEAR_VOLTAGE < STOP_VOLTAGE, "CLEAR_DISTANCE_CM must be larger than STOP_DISTANCE_CM"
 
