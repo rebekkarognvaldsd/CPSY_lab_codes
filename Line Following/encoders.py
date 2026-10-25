@@ -12,6 +12,7 @@ class Encoders:
         self.left = 0
         self.right = 0
         self.t = time.monotonic()
+        self.sample = (0, 0, self.t)     # (left, right, t) from the same line; read this in one go
         self.proc = subprocess.Popen([DECODER, *map(str, pins)],
                                      stdout=subprocess.PIPE, text=True, bufsize=1)
         threading.Thread(target=self._read, daemon=True).start()
@@ -22,6 +23,7 @@ class Encoders:
             if len(parts) == 2:          # skip anything that isn't "left right"
                 self.left, self.right = int(parts[0]), int(parts[1])
                 self.t = time.monotonic()
+                self.sample = (self.left, self.right, self.t)
 
     def close(self):
         self.proc.terminate()            # the decoder handles SIGTERM and releases the pins
