@@ -24,7 +24,7 @@ DT = 0.05         # loop period (s)
 # reading closer than STOP_DISTANCE_CM. Approaching an object, the voltage always rises
 # through this range first, so the rover stops before the object gets too close.
 STOP_DISTANCE_CM = 20   # stop when an object reads as this close or closer
-CLEAR_DISTANCE_CM = 60  # resume only once it reads further away than this
+CLEAR_DISTANCE_CM = 40  # resume only once it reads further away than this
                         # (the gap between the two stops stop/go flicker at the edge)
 CLEAR_TIME = 1.0        # seconds the path must stay clear before resuming
 SENSOR_CHANNEL = 0      # MCP3008 channel the sensor signal wire is on
