@@ -75,7 +75,7 @@ PPR = 700                                     # encoder steps per wheel revoluti
 SIDES = ("left", "right")                     # the two wheels, used to loop over both
 
 color = adafruit_tcs34725.TCS34725(busio.I2C(board.SCL, board.SDA))   # open the colour sensor on I2C
-color.integration_time = 12   # ms; shorter than DT so every loop gets a new reading
+color.integration_time = 12                   # ms; shorter than DT so every loop gets a new reading
 color.gain = 4                                # sensor amplification (higher = brighter readings)
 color.active = True                           # turn the sensor on so it keeps taking readings
 
