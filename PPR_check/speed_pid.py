@@ -68,4 +68,8 @@ finally:
     motor["right"].stop()
     slp.off()
     log.close()
+    # Close GPIO devices so the encoder threads stop before Python exits
+    # (otherwise you can get "Fatal Python error ... daemon threads" at shutdown)
+    for dev in (*enc.values(), *motor.values(), slp):
+        dev.close()
     print("Stopped. Data saved in pid_log.csv")

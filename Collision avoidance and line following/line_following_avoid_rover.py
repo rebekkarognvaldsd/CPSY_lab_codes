@@ -26,8 +26,8 @@ BLACK = 509          # C reading on the black line   (measure with "cal")
 WHITE = 4013          # C reading on the white track  (measure with "cal")
 EDGE = 1              # +1 = line is LEFT of the sensor, -1 = line is RIGHT of the sensor
 
-SPEED = 30            # rpm on a straight
-MIN_SPEED = 10        # rpm in the sharpest turn (slows down when far off the edge)
+SPEED = 40            # rpm on a straight
+MIN_SPEED = 20        # rpm in the sharpest turn (slows down when far off the edge)
 STEER_KP = 60         # rpm wheel difference per unit of error (error is -0.5 .. +0.5)
 STEER_KD = 2.0        # damping on the steering (reduces wobble)
 
@@ -75,8 +75,9 @@ PPR = 700                                     # encoder steps per wheel revoluti
 SIDES = ("left", "right")                     # the two wheels, used to loop over both
 
 color = adafruit_tcs34725.TCS34725(busio.I2C(board.SCL, board.SDA))   # open the colour sensor on I2C
-color.integration_time = 24   # ms; shorter than DT so every loop gets a new reading
+color.integration_time = 12   # ms; shorter than DT so every loop gets a new reading
 color.gain = 4                                # sensor amplification (higher = brighter readings)
+color.active = True                           # turn the sensor on so it keeps taking readings
 
 if len(sys.argv) > 1 and sys.argv[1] == "cal":   # started with "cal"
     print("Hold the sensor over black, then white, then the edge. Ctrl+C to stop.")
